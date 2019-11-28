@@ -7,9 +7,17 @@
  * Author URI: https://quickmaps.io
  * Text Domain: quick-maps
  * Domain Path: /languages
- * Version: 1.0.2
+ * Version: 1.0.3
  * @package Quick Maps
  */
+
+define( 'QMAPS_VERSION', '1.0.3' );
+define( 'QMAPS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'QMAPS_PLUGIN_NAME', trim( dirname( QMAPS_PLUGIN_BASENAME ), '/' ) );
+define( 'QMAPS_PLUGIN_DIR', untrailingslashit( dirname( __FILE__ ) ) );
+define( 'QMAPS_PLUGIN_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
+require_once( QMAPS_PLUGIN_DIR . '/lib/settings.php' );
+
 
 $quickmaps = new Quick_Maps();
 
