@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: Quick Maps
- * Author: Ivan Harmat / Renzo Johnson
- * Plugin URI: https://quickmaps.io/
- * Description: The easiest google map integration for your website.
- * Version: 1.0.1
- * Author URI: https://quickmaps.io/about
+ * Plugin URI: https://quickmaps.io
+ * Description: The easiest google map integration for your website without a Google API Key [quick-maps]Orlando, Florida[/quick-maps] - No Google API required.
+ * Author: quickmaps
+ * Author URI: https://quickmaps.io
  * Text Domain: quick-maps
  * Domain Path: /languages
+ * Version: 1.0.2
  * @package Quick Maps
  */
 
