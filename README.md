@@ -1,4 +1,4 @@
-=== Quick Maps ===
+# Quick Maps
 Contributors: quickmaps, rnzo, ivanharmat
 Donate link: https://bit.ly/2HdTzmO
 Tags: quick maps, easy maps, google maps, maps, ip location, geolocation
@@ -10,7 +10,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 The easiest Google Maps integration for your Wordpress website `[quick-maps]Orlando, Florida[/quick-maps]` - No Google API required.
 
-== Description ==
+## Description
 
 The easiest Google Maps integration for your Wordpress website - No Google API required, copy and paste this sample shortcode anywhere you want your Google maps displayed:
 
@@ -21,7 +21,7 @@ The easiest Google Maps integration for your Wordpress website - No Google API r
 
 
 
-= Premium Features =
+## Premium Features 
 
 * [Support for Color Schemes](https://quickmaps.io)
 * [Support for Lazy Loading](https://quickmaps.io)
@@ -29,6 +29,6 @@ The easiest Google Maps integration for your Wordpress website - No Google API r
 * [Support for Custom JS](https://quickmaps.io)
 * [Support for Custom CSS](https://quickmaps.io)
 
-= Requirements =
+## Requirements 
 
 1. Wordpress 5.3 or higher
