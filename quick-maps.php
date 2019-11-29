@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Quick Maps
  * Plugin URI: https://quickmaps.io
- * Description: The easiest google map integration for your website without a Google API Key [quick-maps]Orlando, Florida[/quick-maps] - No Google API required.
+ * Description: The easiest google map integration for your website [quick-maps]Orlando, Florida[/quick-maps] - No Google API required.
  * Author: quickmaps
  * Author URI: https://quickmaps.io
  * Text Domain: quick-maps
@@ -11,13 +11,14 @@
  * @package Quick Maps
  */
 
-define( 'QMAPS_VERSION', '1.0.3' );
-define( 'QMAPS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-define( 'QMAPS_PLUGIN_NAME', trim( dirname( QMAPS_PLUGIN_BASENAME ), '/' ) );
-define( 'QMAPS_PLUGIN_DIR', untrailingslashit( dirname( __FILE__ ) ) );
-define( 'QMAPS_PLUGIN_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
+// require settings file
+require_once(dirname( __FILE__ ).'/settings.php');
 
-require_once( QMAPS_PLUGIN_DIR . '/lib/settings.php' );
+// require all other php librady files
+$all_library_php_files = glob(QMAPS_PLUGIN_DIR.'/lib/*.php');
+foreach($all_library_php_files as $php_file) {
+	require_once($php_file);
+}
 
 $quickmaps = new Quick_Maps();
 
@@ -28,14 +29,17 @@ class Quick_Maps {
 
 	private $shortcode_tag   = 'quick-maps';
 
-	private $default_width   = '100%';
+	public static $default_width   = '100%';
 
-	private $default_height  = '300px';
+	public static $default_height  = '300px';
 
-	private $default_content = 'Orlando, FL';
+	public static $default_content = 'Orlando International Airport, Jeff Fuqua Boulevard, Orlando, FL';
 
 	function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'widgets_init', function(){
+			register_widget('Quick_Maps_Widget');
+		});
 	}
 
 	public function init() {
@@ -63,12 +67,12 @@ class Quick_Maps {
 		if ( isset( $args['height'] ) && preg_match( '/^[0-9]+(%|px)$/', $args['height'] ) ) {
 			$h = $args['height'];
 		} else {
-			$h = apply_filters( 'quickmaps_default_height', $this->get_default_height());
+			$h = apply_filters( 'quickmaps_default_height', self::get_default_height());
 		}
 		if(is_null($content) || empty($content) || !$content) {
 			$content = apply_filters( 'quickmaps_default_content', $this->get_default_place());
 		}
-		return sprintf('<iframe src="//www.google.com/maps?q=%1$s&amp;output=embed" frameborder="0" width="%2$s" height="%3$s"></iframe>', esc_html( trim( $content)), esc_attr( $w ), esc_attr( $h ));
+		return sprintf('<iframe src="//www.google.com/maps?q=%1$s&amp;output=embed" frameborder="0" width="%2$s" height="%3$s" data-quickmaps="%4$s" class="quickmaps"></iframe>', esc_html( trim( $content)), esc_attr( $w ), esc_attr( $h ), esc_attr(QMAPS_VERSION));
 	}
 
 	public function admin_menu() {
@@ -108,6 +112,14 @@ class Quick_Maps {
 		);
 
 		add_settings_field(
+			'default_place_field',
+			esc_html__( 'Default Place', 'quick-maps' ),
+			[$this, 'default_place_field_html'],
+			'quick_maps_page',
+			'quick_maps_settings_div'
+		);
+
+		add_settings_field(
 			'default_height_field',
 			esc_html__( 'Default Height', 'quick-maps' ),
 			[$this, 'default_height_field_html'],
@@ -118,14 +130,6 @@ class Quick_Maps {
 			'default_width_field',
 			esc_html__( 'Default Width', 'quick-maps' ),
 			[$this, 'default_width_field_html'],
-			'quick_maps_page',
-			'quick_maps_settings_div'
-		);
-
-		add_settings_field(
-			'default_place_field',
-			esc_html__( 'Default Place', 'quick-maps' ),
-			[$this, 'default_place_field_html'],
 			'quick_maps_page',
 			'quick_maps_settings_div'
 		);
@@ -158,7 +162,7 @@ class Quick_Maps {
 	public function default_height_field_html() {
 		printf(
 		        '<input type="text" value="%s">',
-                esc_attr($this->get_default_height())
+                esc_attr(self::get_default_height())
         );
 	}
 
@@ -171,7 +175,7 @@ class Quick_Maps {
 
 	public function default_place_field_html() {
 		printf(
-		        '<input type="text" value="%s">',
+		        '<input type="text" value="%s" class="regular-text">',
                 esc_attr($this->get_default_place())
         );
 	}
@@ -199,18 +203,18 @@ class Quick_Maps {
 		echo '<input type="checkbox" name="" value="yes"> (speeds up page load)';
 	}
 
-	private function get_default_height() {
-		$default_height = $this->default_height;
+	public static function get_default_height() {
+		$default_height = self::$default_height;
 		return $default_height;
     }
 
-    private function get_default_width() {
-		$default_width = $this->default_width;
+    public static function get_default_width() {
+		$default_width = self::$default_width;
 		return $default_width;
     }
 
-    private function get_default_place() {
-    	$default_place = $this->default_content;
+    public static function get_default_place() {
+    	$default_place = self::$default_content;
 		return $default_place;
     }
 }

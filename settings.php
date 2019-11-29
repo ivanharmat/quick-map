@@ -17,9 +17,8 @@
 */
 
 
-// require_once( QMAPS_PLUGIN_DIR . '/lib/activate.php' );
-// require_once( QMAPS_PLUGIN_DIR . '/lib/cme-debug-logger.php' );
-// require_once( QMAPS_PLUGIN_DIR . '/lib/functions.php' );
-// require_once( QMAPS_PLUGIN_DIR . '/lib/enqueue.php' );
-// require_once( QMAPS_PLUGIN_DIR . '/lib/tools.php' );
-require_once( QMAPS_PLUGIN_DIR . '/lib/wp.php' );
+define( 'QMAPS_VERSION', '1.0.3' );
+define( 'QMAPS_PLUGIN_DIR', untrailingslashit( dirname( __FILE__ ) ) );
+define( 'QMAPS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'QMAPS_PLUGIN_NAME', trim( dirname( QMAPS_PLUGIN_BASENAME ), '/' ) );
+define( 'QMAPS_PLUGIN_URL', untrailingslashit( plugins_url( '', __FILE__ ) ) );
