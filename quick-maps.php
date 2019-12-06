@@ -7,7 +7,7 @@
  * Author URI: https://quickmaps.io
  * Text Domain: quick-maps
  * Domain Path: /languages
- * Version: 1.0.4
+ * Version: 1.0.5
  * @package Quick Maps
  */
 

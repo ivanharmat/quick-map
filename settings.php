@@ -17,7 +17,7 @@
 */
 
 
-define( 'QMAPS_VERSION', '1.0.4' );
+define( 'QMAPS_VERSION', '1.0.5' );
 define( 'QMAPS_PLUGIN_DIR', untrailingslashit( dirname( __FILE__ ) ) );
 define( 'QMAPS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'QMAPS_PLUGIN_NAME', trim( dirname( QMAPS_PLUGIN_BASENAME ), '/' ) );
